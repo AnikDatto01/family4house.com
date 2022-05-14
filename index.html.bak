@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="en"> <!--<![endif]-->
+	<head>
+		<!-- Anti-flicker snippet (recommended)  -->
+		<style>.async-hide { opacity: 0 !important} </style>
+		<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+		h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+		(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+		})(window,document.documentElement,'async-hide','dataLayer',4000,
+		{'GTM-PLWC2BX':true});</script>
+
+
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-5ZL4TNK');</script>
+		<!-- End Google Tag Manager -->
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-39860724-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-39860724-1', { 'optimize_id': 'GTM-PLWC2BX'});
+		</script>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<title>Identity Theft Protection Plus Credit Reports | IdentityIQ</title>
+
+		<meta name="robots" content="noindex">
+		<meta name="keywords" content="Identity Protection, Identity Theft Protection, Credit Reports, Credit Scores">
+		<meta name="description" content="Protect your data with identity theft protection and credit monitoring that includes bureau credit reporting, dark web scans, fraud alerts, and more.">		
+		
+		<!-- Mobile Specific Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+			
+		<link href="css/bootstrap.css" rel="stylesheet"> 		
+		<link href="css/rawline.css" rel="stylesheet">
+		<link href="css/style-credessentials21.css" rel="stylesheet">  
+		<link href="css/responsive-styles.css" rel="stylesheet"> 
+								
+		<!-- Favicons 	
+		<link rel="shortcut icon" href="img/favicon.ico">
+		<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" href="img/apple-touch-icon.png">-->
+        
+        <style>
+			p {color: #666 !important;}
+			.hero_content {padding: 8% 30px 10%}
+			.bold, h4 {color: #00bbd3 !important;}
+			#hero h1, #hero h2, #hero h3, .titlebar h1 {color: #00bbd3 !important;}
+			#hero h1 {font-size: 45px !important; font-weight: 300 !important;}
+			#hero h3 {font-weight: 300 !important;}
+			#hero ul {color: #666 !important; font-weight: 300 !important;}
+			#subheader, #pricing_area {display: none;}
+			#logo {width: 199px !important;}
+			.btn-link {border: 1px solid #00bbd3 !important; color: #00bbd3 !important;}
+			.titlebar {border-left: 2px solid #00bbd3 !important;}
+			.social-proof {max-width: 330px !important;}
+			.feature-box-content h4 {color: #00bbd3 !important;}
+			#social_proof {background: #00bbd3 !important;}
+			.copyright a {color: #00bbd3 !important;}
+			#call-to-action {background-image: url('img/bottom-cta-credessentials.jpg') !important;}
+			#call-to-action h1 {color: #fff !important; font-weight: 300 !important;}
+			input[type="submit"] {border: 1px solid #7dbb42 !important; background-color: #7dbb42 !important;}
+			.bottom_cta {
+				/*background: rgba(255,255,255,0.5);*/
+				padding: 50px;
+			}
+			#social_proof img {
+			filter:  brightness(0) invert(1);
+			opacity: 0.7;
+			}
+								
+			@media only screen and (max-width: 767px){
+				#subheader, #hero ul, .trusted-leader {display: none;}
+				#logo {max-width: 300px !important;}
+				#social_proof .col-md-2 {
+					width: 25% !important;
+					float: left !important;
+				}
+			}
+		</style>
+	</head>
+		
+	<body>
+	
+		<!-- CONTENT WRAPPER
+		============================================= -->
+		
+		<div id="content-wrapper">
+        <section id="header">
+            <div class="container logo_center">
+                <div class="floatleft"><img id="logo" src="img/identityiq-199-credessentials.png" alt="logo" role="banner"></div>
+                <div class="floatright"><img class="social-proof" src="img/tri-bureau-logos-new.png" alt="three-bureaus"></div>
+                <div class="clearfloat"></div>
+            </div>
+        </section><!-- /header -->
+        
+        <section id="subheader">
+            <div class="container">
+                <div class="row">
+                    <h1><span class="subheader_span">Protect</span> Your Identity</h1>
+                </div> <!-- End Row -->
+            </div><!-- End Container -->
+        </section>
+        				
+			<!-- HERO
+			============================================= -->
+			
+			<section id="hero" class="parallax">
+				<div class="container">	
+					<div class="row">
+					
+						<!-- Call To Action Content -->	
+						<div class="col-sm-6 text-center">
+                        <!--<img src="img/smartcreditiq-phone.png" class="hero_image" />-->
+                        </div>
+						<div class="col-sm-6">
+							<div class="hero_content">
+                            <h1>Get Your Credit Scores from <span class="bold">All 3 Bureaus!</span></h1>
+                            <h3>Special Offer:<span class="bold"> 7 Days for $1</span>. Then only $34.99/mo.</h3>
+                                <ul>
+                                    <li>Credit Report and Credit Scores</li>
+                                    <li>Daily Credit Monitoring & Alerts</li>
+                                    <li>ScoreCasterIQ<sup>®</sup> - Customized report analysis, score simulations and recommendations</li>
+                                    <li>And Much More!</li>
+                                </ul>
+
+							<!-- Call To Action Button -->	
+
+									<div id="form_register_btn" class="text-center">
+										<!-- Call To Action Button -->	
+                                                <div class="btn-left">
+                                                    
+                                                           <a class="btn-link2" href="Signup2.html" style="background-color:#7dbb42">Get My Scores</a>
+                                                        
+                                                    
+                                                </div> 
+                                                <div class="btn-right"><a class="btn-link" href="#features">Learn More</a></div>
+            									<div class="clearfloat"></div>
+                                                <div style="text-align: left; margin-top: 20px;">Checking your own credit will NOT hurt your score.</div>
+									</div><!-- /form_register_btn -->
+                            </div><!-- /hero_content-->
+						</div><!-- /col-sm-6 -->
+					
+					</div>	<!-- End row -->	
+				</div>	   <!-- End container -->		
+			</section>  <!-- END HERO -->
+            
+			<!-- SOCIAL PROOF
+			============================================= -->
+			
+			<section id="social_proof">
+				<div class="container">	
+                	<div class="row">
+                    
+                    	<div class="col-md-2 trusted-leader">
+                        	<img src="img/trusted-leader-new.png" />
+                        </div><!-- /column -->
+                    
+                    	<div class="col-md-2">
+                        	<img src="img/best-company-logo-2.png" />
+                        </div><!-- /column -->
+                        
+                    	<div class="col-md-2">
+                        	<img src="img/stevie-award-logo-new.png" />
+                        </div><!-- /column -->
+                        
+                    	<div class="col-md-2">
+                        	<img src="img/iheart-radio-logo-new.png" />
+                        </div><!-- /column -->
+                        
+                    	<div class="col-md-2">
+                        	<img src="img/modern-living-logo-new.png" />
+                        </div><!-- /column -->
+                                                
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </section><!-- /social_proof -->
+						
+			<!-- FEATURES
+			============================================= -->
+			
+			<section id="features" class="parallax">
+				<div class="container">	
+				
+					<!-- Section Title -->	
+					<div class="row">
+						<div class="col-md-12">
+                            <div class="titlebar">
+                                <h1>World Class <span>benefits</span></h1>
+                                <p>Our carefully selected suite of identity and credit-related services integrate the power of the most advanced business information resources to inform, protect, alert, and assist in the event of identity theft or credit reporting inaccuracies.</p>
+                            </div>
+                        </div><!-- /titlebar-->
+					</div><!-- /col-md-12 -->
+				
+					<!-- Features Holder -->	
+					<div class="row">
+						<div class="col-md-12">		
+						
+							<ul>
+								<!-- Feature Icon 1 -->
+								<li id="feature_1">       									
+									<div class="col-md-3 feature-box clearfix">	
+                                        
+                                        <div class="feature-box-icon">
+                                        <img src="img/credit-reports-scores-blue.png" />
+										</div>
+
+												
+										<div class="feature-box-content">
+											<h4>Credit Reports &amp; Scores</h4>
+											 <p>Get your complete credit outlook as well as insights into your credit report profile from all three credit reporting bureaus (TransUnion®, Experian™ and Equifax®).</p>
+										</div>
+									</div>
+								</li>
+								
+								<!-- Feature Icon 2 -->
+								<li id="feature_2">       									
+									<div class="col-md-3 feature-box clearfix">	
+                                         
+                                        <div class="feature-box-icon">
+                                        <img src="img/enhanced-credit-monitoring-blue.png" />
+										</div>
+										 
+										<div class="feature-box-content">
+											<h4>Credit Monitoring</h4>
+											<p>Monitoring can alert you to suspicious activity as well as to new accounts and other changes. Our U.S.-based customer service team of experts can assist you with questions if anything looks suspicious.</p>
+										</div>
+									</div>
+								</li>
+								                                
+								<!-- Feature Icon 3 -->
+								<li id="feature_3">       
+									<div class="col-md-3 feature-box clearfix">	
+                                        
+                                        <div class="feature-box-icon">
+                                        <img src="img/identity-monitoring-icon-blue.png" />
+										</div>
+										
+										<div class="feature-box-content">
+											<h4>Identity Theft Monitoring</h4>
+											<p>Your identity goes beyond your credit report. We actively monitor your Social Security number, change-of-address notifications, international and national most-wanted lists, and for your information on the dark web.</p>
+										</div>
+									</div>
+								</li>
+                                
+								<!-- Feature Icon 4 -->
+								<li id="feature_4">       
+									<div class="col-md-3 feature-box clearfix">	
+                                        
+                                        <div class="feature-box-icon">
+                                        <img src="img/identity-theft-insurance-blue.png" />
+										</div>
+										
+										<div class="feature-box-content">
+											<h4>Identity Theft Insurance</h4>
+											<p>With up to $1 million in identity theft insurance that covers out-of-pocket expenses, lost wages, legal advice, and lost funds, you have financial peace of mind.* </p>
+										</div>
+									</div>
+								</li>
+								
+							</ul>
+						
+						</div>	 <!-- End col-md-12 -->
+					</div>	  <!-- End Features Holder -->	
+					
+				</div>	   <!-- End container -->		
+			</section>  <!-- END FEATURES -->
+			
+			<!-- FAQs
+			============================================= -->
+			
+			<section id="faq">
+				<div class="container">	
+				
+					<!-- Section Title -->	
+					<div class="row">
+						<div class="col-md-8">
+                        	<div class="titlebar">
+                                <h1>Our <strong>Approach</strong></h1>
+                                <p>Know what is in your credit reports at the major credit reporting agencies.</p>
+                            </div><!-- / titlebar -->
+                            						<!-- Question #1-->
+						<div id="question_1">	
+							<div class="question">
+                            <h4>Know</h4>
+                            <p>Our goal is to help you understand the things that impact your credit and identity. We provide education, resources and the ability to monitor your credit and identity so you are informed.</p>
+                            
+                            <h4>Watch</h4>
+                            <p>Our industry-leading services help you plan for that big purchase or monitor your credit file, so you can take control of your financial future.</p>
+                            
+                            <h4>Plan</h4>
+                            <p>Our features and services help you plan for the future. Whether you have a target score and want to figure out how to get there or want to plan for the unexpected, our plan can work for you.</p>
+					
+							</div><!-- /question -->						
+						</div><!-- /question_1 -->
+                        </div><!-- /col-md-8 -->
+						<div class="col-md-4"></div>					
+					</div>	<!-- End row -->						
+									
+				</div>	   <!-- End container -->		
+			</section>  <!-- END FAQs -->
+            
+			<!-- PRICING & PLANS
+			============================================= -->
+            
+            <section id="pricing_area">
+            	<div class="container">
+                	<div class="row">
+                    <div class="col-md-12">
+                            <div class="titlebar">
+                            <h1><strong>Special Pricing</strong> for FPA Members</h1>
+                            <p>Provide peace of mind for your clients with one of our plans, specially priced for FPA members.</p>
+                            </div><!-- /titlebar -->
+                    </div>
+                    
+                    <div class="featured">
+                    
+                        <div style="background: #3b4752;" class="pricing_header">
+                            <h2 style="color: #fff !important;">Secure <span class="bold_header">Max</span></h2>
+                            <div class="pricing_middle">
+                            <span class="price_symbol" style="color: #fff !important;">$</span>
+                            <span class="price_dollar" style="color: #fff !important; text-decoration: line-through !important; fon-weight: 100 !important; font-size: 45px !important;">27</span>
+                            <sup class="price_cents" style="color: #fff !important;">99</sup>
+                            <span class="monthly" style="color: #fff !important;">monthly</span>
+                            <br>
+                            <span class="price_symbol" style="color: #fff !important;">$</span>
+                            <span class="price_dollar" style="color: #fff !important; text-transform: line-through; font-weight: 800 !important;">19</span>
+                            <sup class="price_cents" style="color: #fff !important;">99</sup>
+                            <span class="monthly" style="color: #fff !important;">monthly</span>
+                            </div>
+                        
+                        <a href="https://www.identityiq.com/Credit-Reports/SignupInitiate.aspx?offercode=4312537Z&plancode=PLAN6X&transactionid=11234567890&aff_id=2&aff_sub=default" class="protected_button">Select Plan</a>
+                        
+                        <p class="callout_feature" style="color: #fff !important;"><span>Monthly</span> 3 Bureau<br>Credit Reports & Scores</p>
+                        </div>
+                        
+                        <div class="readmore_function">
+                            <p class="readmore_title">MAX FEATURES</p>
+                                <ul>
+                                    <li>Enhanced 3 Bureau Credit Report Monitoring</li>
+                                    <li>Dark Web & Internet Monitoring</li>
+                                    <li>Up to $1 Million in Stolen Funds Reimbursement</li>
+                                    <li>Coverage for Lawyers and Experts</li>
+                                    <li>Coverage for Personal Expense Compensation</li>
+                                    <li>IQ Alerts with Application Monitoring</li>
+                                    <li>SSN Alerts</li>
+                                    <li>Synthetic ID Theft Protection</li>
+                                    <li>Change of Address</li>
+                                    <li>File Sharing Network Searches</li>
+                                    <li>Lost Wallet Assistance</li>
+                                    <li>Checking Account Report</li>
+                                    <li>Opt-out IQ (Junk Mail/Do Not Call List)</li>
+                                    <li>US-Based ID Restoration Service</li>
+                                    <li>Enhanced Credit Report Monitoring</li>
+                                    <li>Alerts on Crimes Committed in Your Name</li>
+                                    <li>Score Change Alerts</li>
+                                    <li>Credit Score Tracker</li>
+                                    <li>Credit Scores Simulator</li>
+                                    <li>Family Protection – $25K ID Theft Insurance – ID Fraud Restoration</li>
+                                    <li>Fraud Restoration with LPOA</li>
+                                </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="featured">
+                    
+                        <div style="background: #efefef;" class="pricing_header">
+                            <h2>Secure <span class="bold_header">Pro</span></h2>
+                            <div class="pricing_middle">
+                            <span class="price_symbol">$</span>
+                            <span class="price_dollar" style="text-decoration: line-through !important; fon-weight: 100 !important; font-size: 45px !important;">19</span>
+                            <sup class="price_cents">99</sup>
+                            <span class="monthly">monthly</span>
+                            <br>
+                            <span class="price_symbol">$</span>
+                            <span class="price_dollar" style="text-transform: line-through; font-weight: 800 !important;">13</span>
+                            <sup class="price_cents">99</sup>
+                            <span class="monthly">monthly</span>
+
+                            </div>
+                        
+                        <a href="https://www.identityiq.com/Credit-Reports/SignupInitiate.aspx?offercode=431141ZS&plancode=PLAN4X&transactionid=11234567890&aff_id=2&aff_sub=default" class="protected_button">Select Plan</a>
+                        
+                        <p class="callout_feature"><span>Bi-Annual</span> 3 Bureau<br>Credit Reports & Scores</p>
+                        </div>
+                        
+                        <div class="readmore_function">
+                            <p class="readmore_title">PRO FEATURES</p>
+                                <ul>
+                                    <li>Enchanced 3 Bureau Credit Report Monitoring</li>
+                                    <li>Dark Web & Internet Monitoring</li>
+                                    <li>Up to $1 Million in Stolen Funds Reimbursement</li>
+                                    <li>Coverage for Lawyers and Experts</li>
+                                    <li>Coverage for Personal Expense Compensation</li>
+                                    <li>IQ Alerts with Application Monitoring</li>
+                                    <li>SSN Alerts</li>
+                                    <li>Synthetic ID Theft Protection</li>
+                                    <li>Change of Address</li>
+                                    <li>File Sharing Network Searches</li>
+                                    <li>Lost Wallet Assistance</li>
+                                    <li>Checking Account Report</li>
+                                    <li>Opt-out IQ (Junk Mail/Do Not Call List)</li>
+                                    <li>US-Based ID Restoration Service</li>
+                                    <li>Enhanced Credit Report Monitoring</li>
+                                    <li>Alerts on Crimes Committed in Your Name</li>
+                                    <li>Score Change Alerts</li>
+                                    <li class="not_included">Credit Score Tracker</li>
+                                    <li class="not_included">Credit Scores Simulator</li>
+                                    <li class="not_included">Family Protection – $25K ID Theft Insurance – ID Fraud Restoration</li>
+                                    <li class="not_included">Fraud Restoration with LPOA</li>
+                                </ul>
+                        </div>
+                    </div>
+
+                    <div class="featured">
+                    
+                        <div style="background: #f7f7f7;" class="pricing_header">
+                            <h2>Secure <span class="bold_header">Plus</span></h2>
+                            <div class="pricing_middle">
+                            <span class="price_symbol">$</span>
+                            <span class="price_dollar" style="text-decoration: line-through !important; fon-weight: 100 !important; font-size: 45px !important;">9</span>
+                            <sup class="price_cents">99</sup>
+                            <span class="monthly">monthly</span>
+                            <br>
+                            <span class="price_symbol">$</span>
+                            <span class="price_dollar" style="text-transform: line-through; font-weight: 800 !important;">6</span>
+                            <sup class="price_cents">99</sup>
+                            <span class="monthly">monthly</span>
+                            </div>
+                        
+                        <a href="https://www.identityiq.com/Credit-Reports/SignupInitiate.aspx?offercode=431141ZS&plancode=PLAN3X&transactionid=11234567890&aff_id=2&aff_sub=default" class="protected_button">Select Plan</a>
+                        
+                        <p class="callout_feature"><span>Annual</span> 3 Bureau<br>Credit Reports & Scores</p>
+                        </div>
+                        
+                        <div class="readmore_function">
+                            <p class="readmore_title">PLUS FEATURES</p>
+                                <ul>
+                                    <li>Daily 1 Bureau Credit Report Monitoring</li>
+                                    <li>Dark Web & Internet Monitoring</li>
+                                    <li>Up to $1 Million in Stolen Funds Reimbursement</li>
+                                    <li>Coverage for Lawyers and Experts</li>
+                                    <li>Coverage for Personal Expense Compensation</li>
+                                    <li>IQ Alerts with Application Monitoring</li>
+                                    <li>SSN Alerts</li>
+                                    <li>Synthetic ID Theft Protection</li>
+                                    <li>Change of Address</li>
+                                    <li>File Sharing Network Searches</li>
+                                    <li>Lost Wallet Assistance</li>
+                                    <li>Checking Account Report</li>
+                                    <li>Opt-out IQ (Junk Mail/Do Not Call List)</li>
+                                    <li>US-Based ID Restoration Service</li>
+                                    <li class="not_included">Enhanced Credit Report Monitoring</li>
+                                    <li class="not_included">Alerts on Crimes Committed in Your Name</li>
+                                    <li class="not_included">Score Change Alerts</li>
+                                    <li class="not_included">Credit Score Tracker</li>
+                                    <li class="not_included">Credit Scores Simulator</li>
+                                    <li class="not_included" class="not_included">Family Protection – $25K ID Theft Insurance – ID Fraud Restoration</li>
+                                    <li class="not_included">Fraud Restoration with LPOA</li>
+                                </ul>
+                        </div>
+                    </div>
+					<div style="clear:both;"></div>
+
+                    
+                    </div>
+                </div>
+            </section>
+                        		
+			
+			<!-- CALL TO ACTION
+			============================================= -->
+			
+			<section id="call-to-action" class="parallax">
+				<div class="container">	
+					<div class="row">
+					
+						<!-- Call To Action Content -->	
+						<div class="col-sm-12 text-center bottom_cta">
+						
+							<h1>Take <span>control</span> of your credit today!</h1>
+							<!--<p>Start Today!</p>-->
+							
+							<!-- Call To Action Button -->	
+							
+                            
+									<div id="form_register_btn" class="text-center">
+									
+									<a class="btn btn-primary btn-lg" href="Signup.html" style="background-color:#7dbb42;padding: 17px 40px;border: 1px solid #fff; border-radius: 200px;font-weight: 800 !important;">Get My Scores</a>
+										
+									</div> 
+
+							
+						</div>	<!-- End Call To Action Content -->	
+					
+					</div>	<!-- End row -->	
+				</div>	   <!-- End container -->		
+			</section>  <!-- END CALL TO ACTION -->
+            
+			<!-- FOOTER
+			============================================= -->
+			<section id="footer">            
+            
+                <p class="copyright">*Underwritten by AIG. <a href="#" target="_blank">Terms and Conditions</a>  |  <a href="" target="_blank">Privacy Policy</a>		
+                <br>&copy Copyright 2022 – IdentityIQ</p>
+            </section><!-- END FOOTER -->
+        </div>	<!-- END CONTENT WRAPPER -->
+	
+	
+		<!-- EXTERNAL SCRIPTS
+		============================================= -->
+		
+		<script src="js/jquery-2.1.0.min.js" type="text/javascript"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript"></script>	
+		<script src="js/modernizr.custom.js" type="text/javascript"></script>	
+		<script src="js/jquery.easing.js" type="text/javascript"></script>
+		<script src="js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
+		<script src="js/jquery.validate.min.js" type="text/javascript"></script>
+		<script defer src="js/jquery.flexslider.js" type="text/javascript"></script>
+		<script src="js/jquery.accordion.source.js" type="text/javascript"></script>	
+		<script src="js/waypoints.min.js" type="text/javascript"></script>		
+		<script src="js/custom.js" type="text/javascript"></script>
+				
+<script src="js/readMoreJS.min.js" type="text/javascript"></script>
+
+<script>
+$readMoreJS.init({
+   target: '.readmore_function', // Selector of the element the plugin applies to (any CSS selector, eg: '#', '.'). Default: ''
+   numOfWords: 23,               // Number of words to initially display (any number). Default: 50
+   toggle: true,                 // If true, user can toggle between 'read more' and 'read less'. Default: true
+   moreLink: 'Read More',    // The text of 'Read more' link. Default: 'read more ...'
+   lessLink: 'Close'         // The text of 'Read less' link. Default: 'read less'
+});
+</script>
+        			
+	</body>
+
+</html>

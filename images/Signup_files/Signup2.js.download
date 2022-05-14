@@ -1,0 +1,604 @@
+﻿String.format = function () {
+    var s = arguments[0];
+    for (var i = 0; i < arguments.length - 1; i++) {
+        var reg = new RegExp("\\{" + i + "\\}", "gm");
+        s = s.replace(reg, arguments[i + 1]);
+    }
+    return s;
+}
+var signUp = (function () {
+    var fieldValidation = {
+        "FirstName": { title: "First Name", isReqInpt: true, regex: ["^[a-zA-Z\\'\\-\\ ]+$"], errMsgId: ["InvalidName"] },
+        "MiddleName": { title: "Middle Initial", isReqInpt: false, regex: ["^[a-zA-Z]+$"], errMsgId: ["OnlyAlpha"] },
+        "LastName": { title: "Last Name", isReqInpt: true, regex: ["^[a-zA-Z\\'\\-\\ ]+$"], errMsgId: ["InvalidName"] },
+        "Suffix": { title: "Suffix", isReqInpt: false, regex: [], errMsgId: [] },
+        "Email": { title: "Email Address", isReqInpt: true, equalToId: "ConfirmEmail", errTargetId: "ConfirmEmail", regex: ["^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$"], errMsgId: ["InvalidData"] },
+        "SecretQuestion": { title: "Secret Question", isReqInpt: true, regex: [], errMsgId: [] },
+        "SecretAnswer": { title: "Secret Answer", isReqInpt: true, regex: [], errMsgId: [] },
+        "ConfirmEmail": { title: "Confirm Email Address", isReqInpt: true, equalToId: "Email", errTargetId: "ConfirmEmail", regex: ["^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$"], errMsgId: ["InvalidData"] },
+        "CurrentAddress": { title: "Street Address & Unit", isReqInpt: true, regex: ["^(?![0-9]*$)[a-zA-Z0-9\\s\\-\\,\\.\\'\\/\\#]+$"], errMsgId: ["InvalidStreetAddr"] },
+        "CurrentCity": { title: "City", isReqInpt: true, regex: ["^[a-zA-Z0-9\-\/\' ]+$"], errMsgId: ["InvalidName"] },
+        "CurrentState": { title: "State", isReqDDL: true, regex: [], errMsgId: [] },
+        "CurrentZip": { title: "Zip Code", isReqInpt: true, isNumeric: true, length: 5, regex: ["^[0-9\\-\\ ]+$"], errMsgId: ["InvalidNumbericLength"] },
+        "PreviousAddress": { title: "Street Address & Unit", isReqInpt: true, regex: ["^(?![0-9]*$)[a-zA-Z0-9\\s\\-\\,\\.\\'\\/\\#]+$"], errMsgId: ["InvalidStreetAddr"] },
+        "PreviousCity": { title: "City", isReqInpt: true, regex: ["^[a-zA-Z0-9\-\/' ]+$"], errMsgId: ["InvalidName"] },
+        "PreviousState": { title: "State", isReqDDL: true, regex: [], errMsgId: [] },
+        "PreviousZip": { title: "Zip Code", isReqInpt: true, isNumeric: true, length: 5, regex: ["^[0-9\\-\\ ]+$"], errMsgId: ["InvalidNumbericLength"] },
+        "HomePhone": { title: "Phone Number", isReqInpt: true, isNumeric: false, length: 15, regex: ["^((\\+)?1)?[\\s.-]?[(]?\\d{3}[)]?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$"], errMsgId: ["InvalidData"] },
+        "UserName": { title: "User ID", isReqInpt: true, min: 6, max: 50, regex: ["^.{6,50}$", "^.{6,}$"], errMsgId: ["InvalidMinMax", "InvalidMin"], regexMulti: [["^(?=[a-zA-Z0-9_\\-\\@])[a-zA-Z0-9_\\-\\@]{6,50}$", "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$"]], errMsgMultiId: ["InvalidUserName"] },
+        "Password": { title: "Password", isReqInpt: true, min: 8, max: 30, equalToId: "ConfirmPassword", errTargetId: "ConfirmPassword", regex: ["[0-9]", "^(?=[a-zA-Z0-9`~!@#\\^\\$%&\\*\\(\\)-_\\+=\\[\\]\\{\\}\\|\\\\,\\.\\?\\>\\<\\s]*[0-9])[a-zA-Z0-9`~!@#\\^\\$%&\\*\\(\\)-_\\+=\\[\\]\\{\\}\\|\\\\,\\.\\?\\>\\<\\s]{8,30}$"], errMsgId: ["InvalidPassword", "InvalidMinMax"] },
+        "ConfirmPassword": { title: "Confirm Password", isReqInpt: true, min: 8, max: 30, equalToId: "Password", errTargetId: "ConfirmPassword", regex: ["[0-9]", "^(?=[a-zA-Z0-9`~!@#\\^\\$%&\\*\\(\\)-_\\+=\\[\\]\\{\\}\\|\\\\,\\.\\?\\>\\<\\s]*[0-9])[a-zA-Z0-9`~!@#\\^\\$%&\\*\\(\\)-_\\+=\\[\\]\\{\\}\\|\\\\,\\.\\?\\>\\<\\s]{8,30}$"], errMsgId: ["InvalidPassword", "InvalidMinMax"] },
+        "CardNumber": { title: "Credit Card Number", isReqInpt: true, regex: ["^[0-9]+$", "^.{15,}$"], errMsgId: ["InvalidNumberic", "InvalidData"] },
+        "CCExpMonth": { title: "Credit Card Expiration Month", isReqDDL: true, regex: [], errMsgId: [] },
+        "CCExpYear": { title: "Credit Card Expiration Year", isReqDDL: true, regex: [], errMsgId: [] },
+        "CVV2": { title: "Security Code", isReqInpt: true, regex: ["^[0-9]+$"], errMsgId: ["InvalidNumberic"] },
+        "BillingAddress": { title: "Street Address & Unit", isReqInpt: true, regex: ["^(?![0-9]*$)[a-zA-Z0-9\\s\\-\\,\\.\\'\\/\\#]+$"], errMsgId: ["InvalidStreetAddr"] },
+        "BillingCity": { title: "City", isReqInpt: true, regex: ["^[a-zA-Z0-9\-\/' ]+$"], errMsgId: ["InvalidName"] },
+        "BillingState": { title: "State", isReqDDL: true, regex: [], errMsgId: [] },
+        "BillingZip": { title: "Zip Code", isReqInpt: true, isNumeric: true, length: 5, regex: ["^[0-9\\-\\ ]+$"], errMsgId: ["InvalidNumbericLength"] },
+        "SSN": { title: "SSN", isReqInpt: true, isNumeric: true, equalToId: "ConfirmSSN", errTargetId: "ConfirmSSN", length: 9, regex: ["^[0-9]+$"], errMsgId: ["InvalidNumbericLength"] },
+        "ConfirmSSN": { title: "Confirm SSN", isReqInpt: true, equalToId: "SSN", errTargetId: "ConfirmSSN", isNumeric: true, length: 9, regex: ["^[0-9]+$"], errMsgId: ["InvalidNumbericLength"] },
+        "DOB": { title: "Birth Date", isReqInpt: true, errMsgId: ["InvalidData"] },
+        "DOBValidate": { title: "Birth Date", errMsgId: ["InvalidData"] }
+    };
+    var errorMessages = {
+        "RequiredInput": "Enter your {0}",
+        "RequiredDDL": "Select your {0}",
+        "InvalidName": "We allow letters, spaces and '/-",
+        "OnlyAlpha": "Letters only",
+        "InvalidData": "Enter a valid {0}.",
+        "InvalidStreetAddr": "Only letters, spaces, numbers and -,.'/#",
+        "InvalidNumbericLength": "Must be numeric",
+        "InvalidNumberic": "Your {0} must be numeric digits. ",
+        "NotMatched": "Both {0} fields must match",
+        "InvalidUserName": "We allow numbers, letters and @_-",
+        "InvalidPassword": "Requires at least one number",
+        "InvalidMinMax": "Must be {0} to {1} characters",
+        "InvalidMin": "Minimum {0} characters",
+        "InvalidData": "Invalid {0}"
+    }
+    function validateControls(eId) {
+        try {
+            var $ev = $(eId), isSuccess = true;
+            var val = $.trim($ev.val());
+            var name = $ev.attr("data-f-name");
+            if (name == "CardNumber") {
+                dataUnMasked = $ev.data('value');
+                val = dataUnMasked ? dataUnMasked : val;
+            }
+            var vObj = fieldValidation[name];
+            if (!vObj) { return; }
+
+            $ev.removeClass("error-ctrl");
+            $ev.siblings("p.elstatus").each(function () {
+                if ($(this).hasClass("text-danger")) {
+                    $(this).text("");
+                }
+            });
+            if (!val) {
+                if (vObj.isReqInpt) {
+                    $ev.addClass("error-ctrl");
+                    $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages["RequiredInput"], vObj.title));
+                    isSuccess = false;
+                } else if (vObj.isReqDDL) {
+                    $ev.addClass("error-ctrl");
+                    $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages["RequiredDDL"], vObj.title));
+                    isSuccess = false;
+                }
+            }
+            if (val && vObj.regex && vObj.regex.length > 0 && isSuccess) {
+                $.each(vObj.regex, function (i, reg) {
+                    if (isSuccess && !(new RegExp(reg, "gi")).test(val)) {
+                        $ev.addClass("error-ctrl");
+                        if (/Min$/ig.test(vObj.errMsgId[i]) && vObj.min) {
+                            $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages[vObj.errMsgId[i]], vObj.min));
+                        } else if (/MinMax$/ig.test(vObj.errMsgId[i]) && vObj.max) {
+                            $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages[vObj.errMsgId[i]], vObj.min, vObj.max));
+                        }
+                        else if (/NumbericLength/ig.test(vObj.errMsgId[i]) && vObj.length) {
+                            $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(errorMessages[vObj.errMsgId[i]]);
+                        } else {
+                            $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages[vObj.errMsgId[i]], vObj.title));
+                        }
+                        isSuccess = false;
+                    }
+                });
+            }
+            if (val && vObj.regexMulti && vObj.regexMulti.length > 0 && isSuccess) {
+                $.each(vObj.regexMulti, function (i, regex) {
+                    var isValid = false;
+                    $.each(regex, function (j, reg) {
+                        if ((new RegExp(reg, "ig")).test(val)) {
+                            isValid = true
+                        }
+                    });
+                    if (!isValid) {
+                        $ev.addClass("error-ctrl");
+                        $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages[vObj.errMsgMultiId[i]], vObj.title));
+                        isSuccess = false;
+                    }
+                });
+            }
+            if (vObj.isNumeric && vObj.length && !isNaN(vObj.length) && isSuccess) {
+                if (val.length != vObj.length) {
+                    $ev.addClass("error-ctrl");
+                    $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages["InvalidData"], vObj.title));
+                    isSuccess = false;
+                }
+            }
+            if (val && !$ev.hasClass("error-ctrl") && vObj.equalToId && isSuccess) {
+                var $equalToTarget = $("[data-f-name='" + vObj.equalToId + "']");
+                var $equalToErrMsg = $("[data-f-name='" + vObj.errTargetId + "']");
+                var equalToVal = $.trim($equalToTarget.val());
+                if (equalToVal && val != equalToVal) {
+                    var equalToObj = fieldValidation[vObj.equalToId];
+                    $equalToErrMsg.addClass("error-ctrl");
+                    $equalToErrMsg.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages["NotMatched"], vObj.equalToId == vObj.errTargetId ? vObj.title : equalToObj.title));
+                    isSuccess = false;
+                } else {
+                    $ev.removeClass("error-ctrl");
+                    $ev.siblings("p.elstatus").text("");
+                    $equalToTarget.removeClass("error-ctrl");
+                    $equalToTarget.siblings("p.elstatus").text("")
+                }
+            }
+            if ((name == "DOB" || name=="DOBValidate") && isSuccess) {
+                if (!moment(val, "MM/DD/YYYY").isValid()) {
+                    $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages["InvalidData"], vObj.title));
+                    isSuccess = false;
+                } else {
+                    var formattedDate = moment(val, "MM/DD/YYYY");
+                    var mmtYear = moment().year(); //Get current year
+
+                    if (formattedDate.year() > mmtYear) {
+                        formattedDate.subtract(100, "year");
+                    }
+                    formattedDate = formattedDate.format('L');
+                    var dobDate = new Date(formattedDate);
+                    var today = new Date();
+                    if (dobDate > today) {
+                        $ev.siblings("p.elstatus").removeClass("text-success").addClass("text-danger").text(String.format(errorMessages["InvalidData"], vObj.title));
+                        isSuccess = false;
+                    }
+                    if (isSuccess) {
+                        $ev.val(formattedDate);
+                    }
+                }
+            }
+            return isSuccess;
+        } catch (ex) {
+
+        }
+    }
+    function numericOnly(textbox, e) {
+        var charCode;
+        if (window.event) // IE 
+        {
+            charCode = e.keyCode;
+            if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 8 && e.keyCode != 45) {
+                event.returnValue = false;
+                return false;
+            }
+        }
+        else {
+            charCode = (e.which) ? e.which : e.keyCode;
+        }
+        if (charCode == 46 || charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 45) {
+            //                alert("Only Numbers Allowed");
+            return false;
+        }
+    }
+    function autohyphen(textbox, e) {
+        var charCode;
+
+        if (window.event) // IE 
+        {
+            charCode = e.keyCode;
+            if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 8 && e.keyCode != 45) {
+                event.returnValue = false;
+                return false;
+            }
+        }
+        else {
+            charCode = (e.which) ? e.which : e.keyCode;
+        }
+
+        if (charCode == 46 || charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 45) {
+            //                alert("Only Numbers Allowed");
+            return false;
+        }
+        else {
+            if (textbox.value.length == 3 || textbox.value.length == 7) {
+                //keycode to avoid response to backspace
+                if (charCode != 8) {
+                    textbox.value = textbox.value + '-';
+                }
+            }
+            return true;
+        }
+    }
+    function autoslash(textbox, e) {
+
+        //                                    var charCode;
+        //                                    var i = 0;
+        var cur;
+        if (window.event) // IE 
+        {
+            charCode = e.keyCode;
+            if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 8 && e.keyCode != 47) {
+                event.returnValue = false;
+                return false;
+            }
+        }
+        else {
+            charCode = (e.which) ? e.which : e.keyCode;
+        }
+
+        //if ((charCode < 48 || charCode > 57) && (charCode < 97 || charCode > 122) && (charCode < 65 || charCode > 90))
+        if (charCode == 46 || charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 47) {
+            //                alert("Only Numbers Allowed");
+            return false;
+        }
+        else {
+
+            if (textbox.value.length == 2 || textbox.value.length == 5) {
+                //keycode to avoid response to backspace
+                if (charCode != 8) {
+                    textbox.value = textbox.value + '/';
+
+                }
+
+                else {
+
+
+                }
+
+            }
+            return true;
+        }
+    }
+    function slashreplace(textbox, e) {
+        var cur;
+        cur = textbox.value;
+        e = e || window.event;
+        var charCode = e.which || e.keyCode;
+        if (charCode == 111 || charCode == 191) {
+            textbox.value = cur.replace("//", "/");
+        }
+        else {
+
+        }
+    };
+    function stickHeaderAtTop(sticky, content, stickyOffset, enable) {
+        var scroll = $(window).scrollTop();
+        if (enable) {
+            if (scroll >= 1) {
+                sticky.addClass('fixedHeader');
+                content.css({ "margin-top": sticky.outerHeight(true) });
+                return false;
+            }
+        }
+        sticky.removeClass('fixedHeader');
+        content.css({ "margin-top": '' });
+    };
+    function toggleMobileBenefits($el, $target) {
+        if ($el.hasClass("fa-plus-square")) {
+            $target.find("li").filter(function (i) {
+                return i > 1;
+            }).slideDown(500);
+            $el.removeClass("fa-plus-square").addClass("fa-minus-square")
+        } else {
+            $target.find("li").filter(function (i) {
+                return i > 1;
+            }).slideUp(500);
+            $el.removeClass("fa-minus-square").addClass("fa-plus-square")
+        }
+    };
+    function showProgress(el, isException) {
+        if (!isException) {
+            $(el).hide();
+            $(el).parent().find(".act-process").removeClass("d-none");
+            return true;
+        }
+        return false;
+    }
+
+    function hideProgress(el) {
+        $(el).show();
+        $(el).parent().find(".act-process").addClass("d-none");
+        return true;
+    }
+    function ValidateSignup(form) {
+        $("[data-f-name]:visible").each(function (i, e) {
+            signUp.validateControls(e);
+        });
+        if ($("[data-f-name]:visible.error-ctrl").length > 0) {
+            $('html, body').animate({
+                scrollTop: $("[data-f-name]:visible.error-ctrl").eq(0).parent().position().top
+            }, 1000);
+            return false;
+        }
+        return true;
+    }
+    function AllowNumbericOnly(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+    return {
+        validateControls: validateControls, autohyphen: numericOnly, autoslash: autoslash,
+        slashreplace: slashreplace, stickHeaderAtTop: stickHeaderAtTop,
+        toggleMobileBenefits: toggleMobileBenefits, ValidateSignup: ValidateSignup, showProgress: showProgress,
+        AllowNumbericOnly: AllowNumbericOnly
+    };
+})();
+var myWindow = null;
+function OpenPopUp(url, name, winWidth, winHeight) {
+    winWidth += 32;
+    winHeight += 96;
+    wleft = (screen.width - winWidth) / 2;
+    wtop = (screen.height - winHeight) / 2;
+    if (url == "SecretCode-Instruction.aspx") {
+        myWindow = window.open(url, name, "location=0, status=0, scrollbars=0, toolbar=0, menubar=0, resizable=0, left=" + wleft + ", top=" + wtop + ", width=" + winWidth + ", height=" + winHeight + "", true);
+    }
+    else {
+        myWindow = window.open(url, name, "location=0, status=0, scrollbars=0, toolbar=0, menubar=0, resizable=1, scrollbars=1, left=" + wleft + ", top=" + wtop + ", width=" + winWidth + ", height=" + winHeight + "", true);
+    }
+    try {
+        myWindow.resizeTo(winWidth, winHeight);
+        myWindow.moveTo(wleft, wtop);
+        myWindow.focus();
+    } catch (e) { }
+    return true;
+}
+function CloseNewWin() {
+    if (myWindow != null && myWindow.open) myWindow.close();
+}
+window.onunload = CloseNewWin;
+function signUphideProgress(el) {
+    $(el).show();
+    $(el).parent().find(".act-process").addClass("d-none");
+    return true;
+}
+function validateEmailOnEnrollment(email, serviceUrl, element, successCallback) {
+
+    $("#InvalidEmailOnEnrollConfirm").html(email);
+    $("#InvalidEmailOnEnrollProceedLink").fancybox({ enableEscapeButton: false, showCloseButton: false,
+        hideOnOverlayClick: false, closeBtn: false,
+        closeClick: false, // prevents closing when clicking INSIDE fancybox
+        helpers: {
+            overlay: { closeClick: false, locked: false} // prevents closing when clicking OUTSIDE fancybox
+        },
+        keys: {
+            close: null
+        },
+        overlayShow: true, 'hideOnContentClick': false,
+        'beforeShow': function () {
+            $(".btnInvalidEmailOnEnrollProceed").each(function () {
+                $(this).off("click").on("click", function () {
+                    $.fancybox.close();
+                    optOutEnrolInvalidEmailAddress(email, serviceUrl, element, successCallback);
+                });
+
+            });
+
+            $(".btnInvalidEmailOnEnrollProceedUpdateEmail").each(function () {
+                $(this).off("click").on("click", function () {
+                    signUphideProgress(element);
+                    $.fancybox.close();
+                    $("#txtEmail").focus();
+
+                });
+
+            });
+        }
+    });
+    $("#InvalidEmailOnEnrollUpdateEmailLink").fancybox({ enableEscapeButton: false, showCloseButton: false,
+        hideOnOverlayClick: false, closeClick: false, // prevents closing when clicking INSIDE fancybox
+        closeBtn: false,
+        helpers: {
+            overlay: { closeClick: false, locked: false} // prevents closing when clicking OUTSIDE fancybox
+        },
+        keys: {
+            close: null
+        },
+        overlayShow: true, 'hideOnContentClick': false,
+        'beforeShow': function () {
+            $(".btnInvalidEmailOnEnrollUpdateEmail").each(function () {
+                $(this).off("click").on("click", function () {
+                    $("#txtEmail").focus();
+                    $.fancybox.close();
+
+                });
+
+            });
+        }
+    });
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "Signup2.aspx/ValidateEmailAdress",
+        data: '{email: "' + email + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            if (r.d.StatusId == 0) {
+                $("#InvalidEmailOnEnrollProceedLink").click();
+            }
+            else if (r.d.StatusId == -1) {
+                signUphideProgress(element);
+                $("#InvalidEmailOnEnrollUpdateEmailLink").click();
+            }
+            else {
+                successCallback();
+                return true;
+            }
+        },
+        failure: function (response) {
+            signUphideProgress(element);
+            alert(response.d);
+        }
+    });
+    return false;
+}
+
+function optOutEnrolInvalidEmailAddress(email, serviceUrl, element, successCallback) {
+    var url = serviceUrl + "?email=" + email + "&api=1&callback=callbackResult";
+    $.getJSON(url, function (response) {
+        if (response.result == "success") {
+            successCallback();
+        } else {
+            signUphideProgress(element);
+            alert("There was an issue with updating invalid email address");
+        }
+    });
+
+}
+
+function clearSpecialCharacters(target) {
+    $(target).on('paste', function (e) {
+        var clipboardData = e.originalEvent.clipboardData ? e.originalEvent.clipboardData : window.clipboardData;
+        var data = clipboardData.getData("text/plain");
+        var dataAfter = $.trim(data.replace(/[^\d]/g, ''));
+        if (dataAfter.length > 10 && dataAfter.charAt(0) == "1") {
+            dataAfter = dataAfter.substr(1);
+        }
+        $(target).val(dataAfter);
+        e.preventDefault();
+    });
+}
+$(function () {
+    /*var phone = document.getElementById('txtHomePhone');
+    clearSpecialCharacters(phone);
+    
+    $("input[data-f-name='DOB']").each(function () {
+        var dateInput = $(this).get(0);
+        addDateFormatter(dateInput);
+    });*/
+});
+
+function checkDateValue(str, max) {
+    if (str.charAt(0) !== '0' || str == '00') {
+        var num = parseInt(str);
+        if (isNaN(num) || num <= 0 || num > max) num = 1;
+        str = num > parseInt(max.toString().charAt(0)) && num.toString().length == 1 ? '0' + num : num.toString();
+    };
+    return str;
+};
+function addDateFormatter(date) { 
+//     date.addEventListener("keydown", function (e) {
+//        var key = event.keyCode || event.charCode;
+//        if (!(key == 8 || key == 46)) {
+//            e.preventDefault();
+//        }
+//    });
+    date.addEventListener("keyup", function (e) {
+        var key = event.keyCode || event.charCode;
+        if (!(key == 8 || key == 46)) {
+            this.type = 'text';
+            var input = this.value;
+            if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
+            var values = input.split('/').map(function (v) {
+                return v.replace(/\D/g, '')
+            });
+            if (values[0]) values[0] = checkDateValue(values[0], 12);
+            if (values[1]) values[1] = checkDateValue(values[1], 31);
+            var output = values.map(function (v, i) {
+                return v.length == 2 && i < 2 ? v + '/' : v;
+            });
+            this.value = output.join('').substr(0, 14);
+        }
+
+    });
+    date.addEventListener('paste', function (e) {
+        this.type = 'text'; 
+        var clipboardData = e.clipboardData ? e.clipboardData : window.clipboardData;
+        var data = clipboardData.getData("text/plain");
+        if (moment(data, "MM/DD/YYYY").isValid()) {
+            var formattedDate = moment(data, "MM/DD/YYYY");
+            var mmtYear = moment().year(); //Get current year
+
+            if (formattedDate.year() > mmtYear) {
+                formattedDate.subtract(100, "year");
+            }
+            this.value = formattedDate.format('L');
+            e.preventDefault();
+        }
+    });
+    date.addEventListener('blur', function (e) {
+        this.type = 'text';
+        var input = this.value;
+        var values = input.split('/').map(function (v, i) {
+            return v.replace(/\D/g, '')
+        });
+        if (values.length == 3) {
+            /*var year = parseInt(values[2]); //values[2].length !== 4 ? parseInt(values[2]) + 2000 : parseInt(values[2]);
+            var month = parseInt(values[0]) - 1;
+            var day = parseInt(values[1]);
+            var d = new Date(year, month, day);
+            if (!isNaN(d)) { 
+            var dates = [d.getMonth() + 1, d.getDate(), d.getFullYear()];
+            output = dates.map(function (v) {
+            v = v.toString();
+            return v.length == 1 ? '0' + v : v;
+            }).join(' / ');
+            };*/
+            if (moment(input, "MM/DD/YYYY").isValid()) {
+                var formattedDate = moment(input, "MM/DD/YYYY");
+                var mmtYear = moment().year(); //Get current year
+
+                if (formattedDate.year() > mmtYear) {
+                    formattedDate.subtract(100, "year");
+                }
+                this.value = formattedDate.format('L');
+            }
+        };
+    });
+}
+
+function GoogleAnalyticPurchaseEvent(analyticsData) {
+    if (analyticsData) {
+        var OfferCode, TransactionId, Brand, PlanCode, TotalValue, PropertyId, Offer_Plan;
+        $.each(analyticsData, function (index, item) {
+            if (item.Key == "GooglePropertyId")
+                PropertyId = item.Value
+            else if (item.Key == "OfferCode")
+                OfferCode = item.Value
+            else if (item.Key == "TransactionId")
+                TransactionId = item.Value
+            else if (item.Key == "Brand")
+                Brand = item.Value
+            else if (item.Key == "PlanCode")
+                PlanCode = item.Value
+            else if (item.Key == "TotalValue")
+                TotalValue = item.Value
+        });
+        Offer_Plan = OfferCode + ' | ' + PlanCode;
+        //Custom property
+        gtag('config', PropertyId, {
+            'custom_map': { 'dimension1': 'sku' }
+        });
+        gtag('event', 'purchase', {
+            "transaction_id": TransactionId,
+            "affiliation": Brand,
+            'sku': OfferCode,
+            "value": parseFloat(TotalValue),
+            "currency": "USD",
+            "items": [
+                {
+                    "name": Offer_Plan,
+                    "brand": Brand,
+                    "category": OfferCode,
+                    "sku": OfferCode,
+                    "quantity": 1,
+                    "price": TotalValue
+                }
+            ]
+        });
+    }
+}

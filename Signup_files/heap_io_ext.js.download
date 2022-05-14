@@ -1,0 +1,149 @@
+"use strict";
+var CancelType;
+(function (CancelType) {
+    CancelType[CancelType["Soft"] = 1] = "Soft";
+    CancelType[CancelType["Hard"] = 2] = "Hard";
+})(CancelType || (CancelType = {}));
+var AuthType;
+(function (AuthType) {
+    AuthType[AuthType["Standard"] = 1] = "Standard";
+    AuthType[AuthType["Manual"] = 2] = "Manual";
+})(AuthType || (AuthType = {}));
+var EnrollmentType;
+(function (EnrollmentType) {
+    EnrollmentType[EnrollmentType["NewEnrollment"] = 1] = "NewEnrollment";
+    EnrollmentType[EnrollmentType["ReEnrollment"] = 2] = "ReEnrollment";
+    EnrollmentType[EnrollmentType["ReInstatement"] = 3] = "ReInstatement";
+})(EnrollmentType || (EnrollmentType = {}));
+
+var HeapExt = /** @class */(function (DefaultBrand) {
+    function HeapExt(UID) {
+        this.isHeapAvailable = false;
+        this.brand = DefaultBrand;
+        this.UID = UID;
+        var enrollmentTypeDesc = {};
+        enrollmentTypeDesc["1"] = "New Enrollment";
+        enrollmentTypeDesc["2"] = "Re-Enrollment";
+        enrollmentTypeDesc["3"] = "Re-Instatement";
+        var authTypeDesc = {};
+        authTypeDesc["1"] = "Standard Authentication";
+        authTypeDesc["2"] = "Manual Authentication";
+        this.EnrollmentTypeDesc = enrollmentTypeDesc;
+        this.AuthTypeDesc = authTypeDesc;
+    }
+    HeapExt.prototype.formatPropertyValue = function (val) {
+        if (val)
+            return val;
+        else
+            return "N/A";
+    };
+    HeapExt.prototype.SetBrand = function (brand) {
+        this.brand = brand;
+    };
+    HeapExt.prototype.AddUserProperties = function (properties) {
+        var that = this;
+        if (!window.heap) {
+            setTimeout(function () { that.AddUserProperties(properties); }, 500);
+        } else {
+            window.heap.identify(this.UID);
+            window.heap.addUserProperties(properties);
+        }
+    };
+    HeapExt.prototype.AddSingleProperty = function (name, value) {
+        var obj = {};
+        obj[name] = this.formatPropertyValue(value);
+        this.AddUserProperties(obj);
+    };
+    HeapExt.prototype.AddMemberId = function (membershipNo) {
+        var propId = this.brand + " Membership ID";
+        this.AddSingleProperty(propId, membershipNo);
+    };
+    HeapExt.prototype.AddMemberStatus = function (status) {
+        var propId = this.brand + " Status";
+        this.AddSingleProperty(propId, status);
+    };
+    HeapExt.prototype.AddMemberEffort = function (effort) {
+        var propId = this.brand + " Effort";
+        this.AddSingleProperty(propId, effort);
+    };
+    HeapExt.prototype.AddMemberPlan = function (plan) {
+        var propId = this.brand + " Plan";
+        this.AddSingleProperty(propId, plan);
+    };
+    HeapExt.prototype.AddMemberReferral = function (mktEntity) {
+        var propId = this.brand + " Marketing Entity";
+        this.AddSingleProperty(propId, mktEntity);
+    };
+    HeapExt.prototype.Track = function (name, properties) {
+        var that = this;
+        if (!window.heap) {
+            setTimeout(function () { that.Track(name, properties); }, 500);
+        } else {
+            window.heap.identify(this.UID);
+            window.heap.track(name, properties);
+        }
+    };
+    HeapExt.prototype.TrackEnrollment = function (promotion, plan, planCost, enrollemtType, authType) {
+        if (planCost) {
+            planCost = planCost.replace("$", "");
+            planCost = parseFloat(planCost);
+            planCost = isNaN(planCost) ? 0 : planCost;
+        }
+        planCost = parseFloat(planCost);
+        planCost = isNaN(planCost) ? 0 : planCost;
+        var eventProperties = {};
+        eventProperties["Brand"] = this.brand;
+        eventProperties["Plan Cost"] = planCost > 0 ? "Paid" : "Free";
+        eventProperties["Enrollment Type"] = this.EnrollmentTypeDesc[enrollemtType];
+        eventProperties["Promotion"] = promotion;
+       // eventProperties["Plan"] = plan;
+        eventProperties["To Plan"] ="Plan"+plan;
+        eventProperties["Authentication Type"] = this.AuthTypeDesc[authType];
+       // this.Track("Enrollment", eventProperties);
+        this.Track("Web - Enrollment - New - IdentityIQ", eventProperties);
+    };
+
+    HeapExt.prototype.TrackReenrollment = function (plan, effort) {
+        this.Track(this.brand + ' Re-Enrollment', { Plan: plan, Effort: effort });
+        //this.AddMemberStatus("Active");
+    };
+    HeapExt.prototype.TrackReinstatedEnrollment = function (plan, effort) {
+        this.Track(this.brand + ' Reinstated Enrollment', { Plan: plan, Effort: effort });
+        //this.AddMemberStatus("Active");
+    };
+    HeapExt.prototype.TrackAuthentication = function (authType, plan, effort) {
+        if (authType == AuthType.Standard) {
+            this.Track(this.brand + ' New Enrollment - Standard Authentication', { Plan: plan, Effort: effort });
+            //this.AddMemberStatus("Active");
+        }
+        else if (authType == AuthType.Manual) {
+            this.Track(this.brand + ' New Enrollment - Manual Authentication', { Plan: plan, Effort: effort });
+            //this.AddMemberStatus("Active");
+        }
+        else {
+            console.log("heap: invalid authentication type");
+        }
+    };
+    HeapExt.prototype.TrackChargeback = function (plan, effort) {
+        this.Track(this.brand + ' Chargeback Initiated', { Plan: plan, Effort: effort });
+    };
+    HeapExt.prototype.TrackCancel = function (cancelType, plan, effort) {
+        var propIdStatus = this.brand + " Status";
+        if (cancelType == CancelType.Soft) {
+            this.Track(this.brand + ' Status Change - Soft Cancel', { Plan: plan, Effort: effort });
+            this.AddSingleProperty(propIdStatus, "Reinstate Pending");
+        }
+        else if (cancelType == CancelType.Hard) {
+            this.Track(this.brand + ' Status Change - Hard Cancel', { Plan: plan, Effort: effort });
+            this.AddSingleProperty(propIdStatus, "Cancelled");
+        }
+        else {
+            console.log("heap: invalid cancel type");
+        }
+    };
+    HeapExt.prototype.TrackReinstatedEnrollment = function (plan, effort) {
+        this.Track(this.brand + ' Reinstated Enrollment', { Plan: plan, Effort: effort });
+        //this.AddMemberStatus("Active");
+    };
+    return HeapExt;
+} ('IdentityIQ'));
